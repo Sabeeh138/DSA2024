@@ -7,17 +7,13 @@ vector<int> slidingWindowMax(const vector<int>& nums, int k) {
     vector<int> deque; // A deque-like vector to store indices
 
     for (int i = 0; i < nums.size(); ++i) {
-        // Remove indices that are out of the bounds of the current window
         if (!deque.empty() && deque.front() <= i - k) {
             deque.erase(deque.begin());
         }
 
-        // Remove indices whose corresponding values are smaller than nums[i]
         while (!deque.empty() && nums[deque.back()] <= nums[i]) {
             deque.pop_back();
         }
-
-        // Add the current index to the deque
         deque.push_back(i);
 
         // Add the maximum value to the result once the first window is complete
